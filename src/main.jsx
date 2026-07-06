@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import ExerciseIcon from './ExerciseIcon.jsx';
+import { exerciseMedia } from './exerciseMedia.js';
 import { getDefaultDayKey, getPlanByDayKey, weekPlans } from './plan.js';
 import './styles.css';
 
@@ -100,6 +101,8 @@ function DayTabs({ selected, onSelect }) {
 
 function ExerciseCard({ exercise, record, onChange }) {
   const sets = record?.sets || [emptySet(exercise)];
+  const media = exerciseMedia[exercise.icon];
+  const [imageFailed, setImageFailed] = useState(false);
 
   function updateSet(index, patch) {
     const nextSets = sets.map((set, setIndex) => (setIndex === index ? { ...set, ...patch } : set));
@@ -120,13 +123,28 @@ function ExerciseCard({ exercise, record, onChange }) {
   return (
     <article className="exercise-card">
       <div className="exercise-head">
-        <ExerciseIcon type={exercise.icon} />
+        <div className="media-box">
+          {media?.gifUrl && !imageFailed ? (
+            <img src={media.gifUrl} alt={`${exercise.name} 动作演示`} loading="lazy" onError={() => setImageFailed(true)} />
+          ) : (
+            <ExerciseIcon type={exercise.icon} />
+          )}
+        </div>
         <div>
           <div className="pill">{exercise.muscle}</div>
           <h3>{exercise.name}</h3>
           <p>{exercise.target} · {exercise.cue}</p>
+          {media?.source && <p className="media-credit">演示：{media.title} · {media.source}</p>}
         </div>
       </div>
+      {media?.instructions?.length > 0 && (
+        <details className="instruction-box">
+          <summary>查看动作要点</summary>
+          <ol>
+            {media.instructions.map((step) => <li key={step}>{step}</li>)}
+          </ol>
+        </details>
+      )}
       <div className="set-list">
         {sets.map((set, index) => (
           <div className="set-row" key={index}>

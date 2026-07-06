@@ -90,3 +90,21 @@ button:disabled { opacity: .45; cursor: not-allowed; }
   .save-bar { grid-template-columns: 1fr; }
   .save-bar button { width: 100%; }
 }
+.media-box { width: 150px; min-height: 112px; display: grid; place-items: center; border-radius: 18px; overflow: hidden; background: #fff7ed; border: 1px solid #fed7aa; }
+.media-box img { width: 100%; height: 100%; min-height: 112px; object-fit: cover; display: block; }
+.media-box .exercise-icon { width: 112px; height: 86px; }
+.media-credit { margin-top: 6px !important; font-size: 12px; color: #9a3412 !important; }
+.instruction-box { margin-top: 12px; border-radius: 18px; background: #fff7ed; border: 1px solid #fed7aa; padding: 10px 12px; }
+.instruction-box summary { cursor: pointer; font-weight: 850; color: #c2410c; }
+.instruction-box ol { margin: 10px 0 0; padding-left: 20px; color: #475569; line-height: 1.55; }
+.instruction-box li + li { margin-top: 4px; }
+@media (max-width: 620px) {
+  .exercise-head { grid-template-columns: 132px 1fr; }
+  .media-box { width: 132px; min-height: 104px; }
+  .media-box img { min-height: 104px; }
+}
+@media (max-width: 420px) {
+  .exercise-head { grid-template-columns: 1fr; }
+  .media-box { width: 100%; min-height: 190px; }
+  .media-box img { min-height: 190px; }
+}
