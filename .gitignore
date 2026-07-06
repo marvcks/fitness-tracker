@@ -7,3 +7,5 @@ fitness-tracker.log
 *.log
 data/*.json
 .DS_Store
+
+.playwright-mcp/
