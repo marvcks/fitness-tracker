@@ -254,6 +254,28 @@ function App() {
     }
   }
 
+  async function exportRecords() {
+    setStatus('导出中…');
+    try {
+      const token = localStorage.getItem(tokenKey);
+      const response = await fetch('/api/export', { headers: { Authorization: `Bearer ${token}` } });
+      if (!response.ok) throw new Error('导出失败');
+      const blob = await response.blob();
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `fitness-records-${todayKey()}.json`;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+      setStatus('已导出');
+      setTimeout(() => setStatus(''), 1800);
+    } catch (err) {
+      setStatus(err.message);
+    }
+  }
+
   function logout() {
     localStorage.removeItem(tokenKey);
     setLoggedIn(false);
@@ -295,11 +317,7 @@ function App() {
       <nav className="bottom-nav top-nav">
         <button className={view === 'today' ? 'active' : ''} onClick={() => setView('today')}>训练</button>
         <button className={view === 'history' ? 'active' : ''} onClick={() => setView('history')}>历史</button>
-        <a href="/api/export" onClick={(event) => {
-          event.preventDefault();
-          const token = localStorage.getItem(tokenKey);
-          window.open(`/api/export?token=${encodeURIComponent(token || '')}`, '_blank');
-        }}>导出</a>
+        <button type="button" onClick={exportRecords}>导出</button>
       </nav>
 
       {view === 'today' ? (
