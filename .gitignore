@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.env
+.env.*
+!.env.example
+fitness-tracker.log
+*.log
+data/*.json
+.DS_Store
