@@ -43,7 +43,7 @@ button:disabled { opacity: .45; cursor: not-allowed; }
 .panel, .exercise-card, .plan-summary { background: rgba(255,255,255,.92); border: 1px solid #fed7aa; border-radius: 24px; box-shadow: 0 12px 34px rgba(15, 23, 42, .06); }
 .controls-panel { padding: 16px; display: grid; gap: 14px; }
 .controls-panel label, .notes-panel label { display: grid; gap: 8px; color: #475569; font-weight: 750; }
-.tabs { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; overflow-x: auto; }
+.tabs { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; overflow-x: auto; }
 .tabs button { min-width: 72px; padding: 10px 8px; background: #f8fafc; color: #475569; border: 1px solid #e2e8f0; }
 .tabs button.active { background: #f97316; color: white; border-color: #f97316; }
 .tabs small { display: block; font-size: 11px; opacity: .75; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -81,7 +81,7 @@ button:disabled { opacity: .45; cursor: not-allowed; }
 @media (max-width: 620px) {
   .app-shell { padding-inline: 10px; }
   .hero { border-radius: 26px; padding: 18px; }
-  .tabs { grid-template-columns: repeat(5, 78px); }
+  .tabs { grid-template-columns: repeat(6, 78px); }
   .exercise-head { grid-template-columns: 90px 1fr; }
   .exercise-icon { width: 90px; height: 72px; }
   .set-row { grid-template-columns: 42px 1fr 1fr 44px; }

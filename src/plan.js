@@ -65,6 +65,21 @@ export const weekPlans = [
       { id: 'friday-kickback', name: '俯身哑铃臂屈伸', type: 'strength', target: '2 x 10-12/侧', cue: '肘部固定', muscle: '三头', icon: 'kickback' },
       { id: 'easy-run', name: '轻松跑/快走', type: 'cardio', target: '8-10 分钟', cue: '全程能讲话，不冲刺', muscle: '心肺', icon: 'run' }
     ]
+  },
+  {
+    dayKey: 'arm-focus',
+    label: '调整',
+    title: '手臂 + 背部轻辅助',
+    goal: '适合前一天练腿、跳过训练日或身体刚恢复时使用；不练腿，强度控制在 7 成。',
+    exercises: [
+      { id: 'adjust-pulldown', name: '反握肩距坐姿下拉', type: 'strength', target: '3 x 10-12', cue: '先沉肩，再把手肘向下拉，作为二头热身', muscle: '背部', icon: 'pulldown' },
+      { id: 'adjust-row', name: '窄握坐姿划船', type: 'strength', target: '2 x 10-12', cue: '肩胛向后夹，不要耸肩', muscle: '背部', icon: 'row' },
+      { id: 'adjust-curl', name: '哑铃弯举', type: 'strength', target: '3 x 10-12/侧', cue: '建议 2.5kg 或 5kg 起步，身体不要晃', muscle: '二头', icon: 'curl' },
+      { id: 'hammer-curl', name: '哑铃锤式弯举', type: 'strength', target: '2 x 10-12/侧', cue: '掌心相对，手腕保持中立', muscle: '二头/前臂', icon: 'curl' },
+      { id: 'adjust-kickback', name: '俯身哑铃臂屈伸', type: 'strength', target: '3 x 12/侧', cue: '建议 2.5kg 起步，上臂固定', muscle: '三头', icon: 'kickback' },
+      { id: 'adjust-plank', name: '平板支撑', type: 'cardio', target: '2 x 20-30 秒', cue: '腰腹收紧，不塌腰', muscle: '核心', icon: 'plank', unit: '秒' },
+      { id: 'adjust-walk', name: '快走放松', type: 'cardio', target: '5 分钟', cue: '轻松走，帮助恢复，不冲强度', muscle: '心肺', icon: 'walk' }
+    ]
   }
 ];
 
@@ -72,7 +87,16 @@ export function getPlanByDayKey(dayKey) {
   return weekPlans.find((plan) => plan.dayKey === dayKey) || weekPlans[0];
 }
 
+function toLocalDateKey(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
 export function getDefaultDayKey(date = new Date()) {
+  const dateKey = toLocalDateKey(date);
+  if (dateKey === '2026-07-09') return 'arm-focus';
   const day = date.getDay();
   if (day >= 1 && day <= 5) return weekPlans[day - 1].dayKey;
   return 'monday';
